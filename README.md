@@ -30,7 +30,7 @@ The default parameters for Boro rice are AOT 0.85, LUEc 0.70, HI 0.45 and MC 0.1
 ## How to run
 
 - **Earth Engine scripts.** Paste into the [Code Editor](https://code.earthengine.google.com), run, then start the exports from the Tasks tab. GLEAM is not in the public catalogue, so ingest it as your own asset first and set `GLEAM_ASSET`.
-- **WaPOR scripts.** `pip install wapordl rasterio numpy`, then `python python/wapor_crop_yield.py`.
+- **WaPOR scripts.** `pip install -r requirements.txt`, then `python python/wapor_crop_yield.py`.
 
 The study area boundary is embedded in the scripts as coordinates, so no upload is needed.
 
