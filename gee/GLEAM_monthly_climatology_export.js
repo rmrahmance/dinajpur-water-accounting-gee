@@ -1,5 +1,12 @@
 // GLEAM mean actual ET per calendar month (Jan = mean of all Januaries, etc.)
 // Clipped BY EXTENT of Boundary_W4140_4326_dissolve, exported as GeoTIFFs.
+// Short version of GLEAM_monthly_Eactual_1983_2021_export.js (climatology only).
+//
+// Input : your own GLEAM v4 monthly E asset (set GLEAM_ASSET and E_BAND)
+// Output: 12 GeoTIFFs, GLEAM_E_mean_M01 ... GLEAM_E_mean_M12,
+//         in the Drive folder GLEAM_W4140
+// Run   : paste into the Code Editor, run, then start the 12 exports
+//         from the Tasks tab.
 
 var GLEAM_ASSET = 'users/YOUR_USERNAME/GLEAM_v4_monthly_E'; // <-- your ingested asset
 var E_BAND = 'E';   // or 'b1' after ingestion

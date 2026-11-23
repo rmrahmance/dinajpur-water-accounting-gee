@@ -1,6 +1,12 @@
 // Mean actual ET per calendar month (Jan = mean of all Januaries, 1983-2025, etc.)
 // Dataset: TerraClimate 'aet' (public in GEE, no upload needed).
 // Clipped BY EXTENT of Boundary_W4140_4326_dissolve, exported as GeoTIFFs.
+//
+// Input : IDAHO_EPSCOR/TERRACLIMATE, band 'aet', 1983-2025
+// Output: 12 GeoTIFFs in mm/month, AET_mean_M01 ... AET_mean_M12,
+//         in the Drive folder AET_W4140
+// Run   : paste into the Code Editor, run, then start the 12 exports
+//         from the Tasks tab.
 
 var extent = ee.Geometry.Rectangle(
   [88.6355896, 25.893440248, 88.732582093, 26.025365830], 'EPSG:4326', false);
