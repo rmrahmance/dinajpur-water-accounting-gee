@@ -1,8 +1,8 @@
-// Mean actual ET per calendar month (Jan = mean of all Januaries, 1983-2025, etc.)
+// Mean actual ET per calendar month (Jan = mean of all Januaries, 1983-2024, etc.)
 // Dataset: TerraClimate 'aet' (public in GEE, no upload needed).
 // Clipped BY EXTENT of Boundary_W4140_4326_dissolve, exported as GeoTIFFs.
 //
-// Input : IDAHO_EPSCOR/TERRACLIMATE, band 'aet', 1983-2025
+// Input : IDAHO_EPSCOR/TERRACLIMATE, band 'aet', 1983-2024
 // Output: 12 GeoTIFFs in mm/month, AET_mean_M01 ... AET_mean_M12,
 //         in the Drive folder AET_W4140
 // Run   : paste into the Code Editor, run, then start the 12 exports
@@ -13,7 +13,7 @@ var extent = ee.Geometry.Rectangle(
 
 // aet is stored *10; multiply by 0.1 to get mm/month.
 var aet = ee.ImageCollection('IDAHO_EPSCOR/TERRACLIMATE')
-  .filterDate('1983-01-01', '2026-01-01')
+  .filterDate('1983-01-01', '2025-01-01')
   .select('aet')
   .map(function (img) { return img.multiply(0.1)
       .copyProperties(img, ['system:time_start']); });

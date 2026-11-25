@@ -9,7 +9,7 @@ The scripts only download and prepare data. Crop water requirements, irrigation 
 | File | Data | What it produces |
 |---|---|---|
 | `gee/CHIRPS_annual_precip_1981_2025.js` | CHIRPS daily rainfall (UCSB-CHG) | Annual precipitation 1981–2025 as a CSV time series, plus optional GeoTIFFs and a console chart |
-| `gee/TerraClimate_monthly_AET_climatology.js` | TerraClimate `aet` | Mean actual ET for each calendar month, 1983–2025 |
+| `gee/TerraClimate_monthly_AET_climatology.js` | TerraClimate `aet` | Mean actual ET for each calendar month, 1983–2024 |
 | `gee/GLEAM_monthly_Eactual_1983_2021_export.js` | GLEAM v4 actual evaporation (user-ingested asset) | Monthly series, monthly climatology and the period mean as GeoTIFFs |
 | `gee/GLEAM_monthly_climatology_export.js` | GLEAM v4 | Monthly climatology only (short version) |
 | `gee/vegetation_mapping_mohanpur.js` | Sentinel-2, ESA WorldCover, Dynamic World | Vegetation map of the union from spectral indices and land-cover classes |
@@ -32,7 +32,7 @@ The default parameters for Boro rice are AOT 0.85, LUEc 0.70, HI 0.45 and MC 0.1
 - **Earth Engine scripts.** Paste into the [Code Editor](https://code.earthengine.google.com), run, then start the exports from the Tasks tab. GLEAM is not in the public catalogue, so ingest it as your own asset first and set `GLEAM_ASSET`.
 - **WaPOR scripts.** `pip install -r requirements.txt`, then `python python/wapor_crop_yield.py`.
 
-The study area boundary is embedded in the scripts as coordinates, so no upload is needed.
+The study area is embedded as coordinates, so no upload is needed: the exact boundary in the vegetation script and its bounding box in the GLEAM and TerraClimate scripts. The CHIRPS script uses a 10 km circle around 25.65° N, 88.68° E, which does not cover Mohanpur Union; replace `aoi` for that area. The WaPOR scripts use a bounding box of Dinajpur.
 
 ## Author
 
