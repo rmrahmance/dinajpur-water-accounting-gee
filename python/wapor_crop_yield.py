@@ -14,8 +14,7 @@ Run from a terminal:
 ==============================================================================
 """
 
-import os, glob
-from datetime import date
+import os
 import numpy as np
 import rasterio
 from wapordl import wapor_map
@@ -36,47 +35,39 @@ LUEc = 0.70    # light-use-efficiency correction (C3: 0.6-0.9)
 HI   = 0.45    # harvest index (cereals 0.3-0.5)
 MC   = 0.14    # moisture content of harvested grain (rice ~0.14)
 SCALE_22 = 22.222   # FAO factor: gC/m2 -> kg dry-matter/ha
+NPP_SCALE = 0.001   # WaPOR v3 scale factor of L1-NPP-M (stored integer -> gC/m2/month)
 
 # ----------------------------------------------------------------------------
-# 3. DOWNLOAD NPP TILES
+# 3. DOWNLOAD NPP  (one GeoTIFF, one band per month)
 # ----------------------------------------------------------------------------
 os.makedirs(FOLDER, exist_ok=True)
 print("Downloading WaPOR NPP ...")
-wapor_map(REGION, VARIABLE, PERIOD, FOLDER)
-
-tifs = sorted(glob.glob(os.path.join(FOLDER, "*.tif")))
-if not tifs:
-    raise SystemExit("No NPP GeoTIFFs found in " + FOLDER)
-print("Found %d NPP file(s):" % len(tifs))
-for t in tifs:
-    print("  ", os.path.basename(t))
+npp_file = wapor_map(REGION, VARIABLE, PERIOD, FOLDER)
+print("NPP file:", npp_file)
 
 # ----------------------------------------------------------------------------
 # 4. ACCUMULATE NPP OVER THE SEASON  -> gC/m2
-#    WaPOR NPP pixel = mean daily NPP (gC/m2/day).
-#    Seasonal NPP (gC/m2) = mean(daily NPP across months) x season length (days)
+#    L1-NPP-M pixel = NPP of that month (gC/m2/month), stored as integer.
+#    Seasonal NPP (gC/m2) = sum over the months. PERIOD must cover full months.
 # ----------------------------------------------------------------------------
-stack, profile = [], None
-for t in tifs:
-    with rasterio.open(t) as src:
-        if profile is None:
-            profile = src.profile.copy()
-        arr = src.read(1).astype("float32")
-        nd = src.nodata
-        if nd is not None:
-            arr[arr == nd] = np.nan
-        arr[arr < 0] = np.nan          # mask any remaining fill values
-        stack.append(arr)
+y0, m0 = (int(v) for v in PERIOD[0].split("-")[:2])
+y1, m1 = (int(v) for v in PERIOD[1].split("-")[:2])
+n_months = (y1 - y0) * 12 + (m1 - m0) + 1
 
-stack = np.array(stack)                                  # (months, rows, cols)
-mean_daily_npp = np.nanmean(stack, axis=0)               # gC/m2/day
+with rasterio.open(npp_file) as src:
+    if src.count != n_months:
+        raise SystemExit("Expected %d monthly bands, found %d" % (n_months, src.count))
+    profile = src.profile.copy()
+    stack = src.read(masked=True).astype("float32").filled(np.nan)   # (months, rows, cols)
+    for k, (scale, offset) in enumerate(zip(src.scales, src.offsets)):
+        if scale == 1.0 and np.issubdtype(np.dtype(src.dtypes[k]), np.integer):
+            scale = NPP_SCALE                # scale factor missing in the file
+        stack[k] = stack[k] * scale + offset
 
-d0 = date.fromisoformat(PERIOD[0])
-d1 = date.fromisoformat(PERIOD[1])
-season_days = (d1 - d0).days + 1
-print("Season length: %d days" % season_days)
+stack[stack < 0] = np.nan                    # mask any remaining fill values
+print("Months summed: %d" % n_months)
 
-npp_seasonal = mean_daily_npp * season_days              # gC/m2 (accumulated)
+npp_seasonal = stack.sum(axis=0)             # gC/m2; a pixel with a missing month stays empty
 
 # ----------------------------------------------------------------------------
 # 5. YIELD EQUATIONS (FAO, 2020)
