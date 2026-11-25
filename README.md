@@ -10,8 +10,8 @@ The scripts only download and prepare data. Crop water requirements, irrigation 
 |---|---|---|
 | `gee/CHIRPS_annual_precip_1981_2025.js` | CHIRPS daily rainfall (UCSB-CHG) | Annual precipitation 1981–2025 as a CSV time series, plus optional GeoTIFFs and a console chart |
 | `gee/TerraClimate_monthly_AET_climatology.js` | TerraClimate `aet` | Mean actual ET for each calendar month, 1983–2024 |
-| `gee/GLEAM_monthly_Eactual_1983_2021_export.js` | GLEAM v4 actual evaporation (user-ingested asset) | Monthly series, monthly climatology and the period mean as GeoTIFFs |
-| `gee/GLEAM_monthly_climatology_export.js` | GLEAM v4 | Monthly climatology only (short version) |
+| `gee/GLEAM_monthly_Eactual_1983_2021_export.js` | GLEAM v4.2 actual evaporation, 0.1° (user-ingested asset) | Monthly series, monthly climatology and the period mean as GeoTIFFs |
+| `gee/GLEAM_monthly_climatology_export.js` | GLEAM v4.2 | Monthly climatology only (short version) |
 | `gee/vegetation_mapping_mohanpur.js` | Sentinel-2, ESA WorldCover, Dynamic World | Vegetation map of the union from spectral indices and land-cover classes |
 | `python/wapor_npp_download.py` | FAO WaPOR v3 NPP | Minimal download example with `wapordl` |
 | `python/wapor_crop_yield.py` | FAO WaPOR v3 NPP | Seasonal NPP turned into above-ground biomass and Boro rice yield, written out as GeoTIFFs |

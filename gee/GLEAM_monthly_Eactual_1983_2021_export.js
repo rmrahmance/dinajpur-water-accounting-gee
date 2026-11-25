@@ -1,5 +1,5 @@
 /**********************************************************************
- * GLEAM Actual Evaporation (E)  |  Monthly, 1983–2021
+ * GLEAM v4.2 Actual Evaporation (E)  |  Monthly, 1983–2021
  * Study area: Boundary_W4140_4326_dissolve  (northern Bangladesh)
  * Clips rasters BY EXTENT (bounding box) and exports GeoTIFFs to Drive.
  *
@@ -31,8 +31,8 @@ var E_BAND = 'E';                                             // or 'b1'
 var START = '1983-01-01';
 var END   = '2022-01-01';   // exclusive upper bound = all of 2021
 
-// (4) Native GLEAM resolution ~ 0.25 deg ≈ 27830 m. Keep native scale.
-var SCALE = 27830;          // metres (approx 0.25 deg)
+// (4) Native GLEAM v4 resolution is 0.1 deg ≈ 11132 m. Keep native scale.
+var SCALE = 11132;          // metres (approx 0.1 deg)
 
 // (5) Output selection
 var RUN_MONTHLY_SERIES = true;   // 468 monthly rasters
@@ -145,7 +145,7 @@ if (RUN_OVERALL_MEAN) {
  * HOW TO GET GLEAM INTO EARTH ENGINE
  * ------------------------------------------------------------------
  * 1. Register & download the GLEAM monthly actual-evaporation product
- *    "E" from https://www.gleam.eu (yearly NetCDF, 0.25°, 1980–2022+).
+ *    "E" from https://www.gleam.eu (v4.2, yearly NetCDF, 0.1°, from 1980).
  * 2. Convert each monthly slice to GeoTIFF (e.g. with GDAL:
  *      gdal_translate NETCDF:"E_1983.nc":E -b <monthIndex> E_1983_01.tif)
  *    keeping system:time_start, or use gdal + a small script.
