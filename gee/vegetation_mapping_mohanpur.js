@@ -1,5 +1,5 @@
 /**********************************************************************
- * W4140 — Vegetation mapping for the study area
+ * W4140: Vegetation mapping for the study area
  * Study area : Mohanpur Union, Birganj, Dinajpur, Rangpur, Bangladesh
  * Boundary   : Boundary_W4140_4326_dissolve  (EPSG:4326)
  * Goal       : Map ALL vegetation inside the study area using

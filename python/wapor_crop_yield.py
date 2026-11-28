@@ -1,6 +1,6 @@
 """
 ==============================================================================
-WaPOR crop-yield estimation — Dinajpur, Bangladesh  (Boro rice)
+WaPOR crop-yield estimation, Dinajpur, Bangladesh  (Boro rice)
 ------------------------------------------------------------------------------
 Steps:
   1. Download WaPOR v3 NPP (global 300 m) for the growing season.
@@ -9,7 +9,7 @@ Steps:
   4. Save seasonal-NPP and yield GeoTIFFs; print the field-average yield.
 
 Run from a terminal:
-    pip install wapordl rasterio numpy
+    pip install -r requirements.txt   (from the repo root)
     python wapor_crop_yield.py
 ==============================================================================
 """
@@ -28,7 +28,7 @@ PERIOD   = ["2023-01-01", "2023-05-31"]        # Boro rice season (year >= 2018)
 FOLDER   = "./wapor_npp"
 
 # ----------------------------------------------------------------------------
-# 2. CROP PARAMETERS — Boro rice (C3 cereal). Adjust from literature & justify.
+# 2. CROP PARAMETERS: Boro rice (C3 cereal). Adjust from literature & justify.
 # ----------------------------------------------------------------------------
 AOT  = 0.85    # above-ground / total biomass ratio (0.80-0.90)
 LUEc = 0.70    # light-use-efficiency correction (C3: 0.6-0.9)

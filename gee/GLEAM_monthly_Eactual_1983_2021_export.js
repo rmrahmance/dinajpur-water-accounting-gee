@@ -9,9 +9,9 @@
  *   3. Overall mean         -> 1 GeoTIFF (mean over the whole period)
  *
  * ------------------------------------------------------------------
- * IMPORTANT — GLEAM is NOT in the Earth Engine public data catalog.
+ * IMPORTANT: GLEAM is NOT in the Earth Engine public data catalog.
  * You must first ingest the GLEAM monthly "E" product (from
- * https://www.gleam.eu — NetCDF converted to GeoTIFF, or the yearly
+ * https://www.gleam.eu, as NetCDF converted to GeoTIFF or the yearly
  * NetCDFs) as your OWN Earth Engine ImageCollection asset, then put
  * that asset path in GLEAM_ASSET below. See notes at the bottom.
  * ------------------------------------------------------------------

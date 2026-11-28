@@ -1,9 +1,9 @@
 /**********************************************************************
- * CHIRPS annual precipitation (mm/year) — Dinajpur, Bangladesh
- * Course: W4140 — Irrigation Planning / Water Accounting
+ * CHIRPS annual precipitation (mm/year), Dinajpur, Bangladesh
+ * Course: W4140, Irrigation Planning / Water Accounting
  *
  * Dataset : UCSB-CHG/CHIRPS/DAILY  (daily rainfall, ~5.5 km)
- * Period  : 1981–2025  (CHIRPS begins 1 Jan 1981 — there is NO 1980 data)
+ * Period  : 1981–2025  (CHIRPS begins 1 Jan 1981, there is NO 1980 data)
  * Output  : (1) annual time-series CSV  -> Google Drive
  *           (2) annual precipitation rasters (GeoTIFF) -> Drive (optional)
  *           (3) chart in the Console
@@ -75,7 +75,7 @@ var annualTable = ee.FeatureCollection(
 var chart = ui.Chart.feature.byFeature(annualTable, 'year', 'precip_mm')
   .setChartType('ColumnChart')
   .setOptions({
-    title: 'CHIRPS Annual Precipitation — Dinajpur (' + startYear + '–' + endYear + ')',
+    title: 'CHIRPS Annual Precipitation, Dinajpur (' + startYear + '–' + endYear + ')',
     hAxis: {title: 'Year', format: '####'},
     vAxis: {title: 'Precipitation (mm/year)'},
     legend: {position: 'none'}
@@ -94,7 +94,7 @@ Export.table.toDrive({
 });
 
 // ----------------------------------------------------------------------
-// 7. (OPTIONAL) EXPORT ANNUAL RASTERS (GeoTIFF) — one file per year.
+// 7. (OPTIONAL) EXPORT ANNUAL RASTERS (GeoTIFF), one file per year.
 //    Uncomment the block below ONLY if you need the maps. It queues 45
 //    export tasks; run them from the Tasks tab.
 // ----------------------------------------------------------------------
